@@ -1,0 +1,82 @@
+<mat-card class="table-container">
+  <mat-toolbar class="table-header">
+    <span class="table-title">Lista de Máquinas.    Anthony Barco</span>
+    <span class="spacer"></span>
+    <mat-form-field appearance="outline">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)"  class="search-input" placeholder="Filtrar máquinas">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="openForm()">
+      Agregar Máquina
+    </button>
+  </mat-toolbar>
+
+  <mat-table [dataSource]="filteredMachines" class="mat-elevation-z8">
+    <!-- Nombre -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let machine"> {{ machine.name }} </mat-cell>
+    </ng-container>
+
+    <!-- Modelo -->
+    <ng-container matColumnDef="model">
+      <mat-header-cell *matHeaderCellDef> Modelo </mat-header-cell>
+      <mat-cell *matCellDef="let machine"> {{ machine.model }} </mat-cell>
+    </ng-container>
+
+    <!-- Serial -->
+    <ng-container matColumnDef="serialNumber">
+      <mat-header-cell *matHeaderCellDef> Serial </mat-header-cell>
+      <mat-cell *matCellDef="let machine"> {{ machine.serialNumber }} </mat-cell>
+    </ng-container>
+
+    <!-- Ubicación -->
+    <ng-container matColumnDef="location">
+      <mat-header-cell *matHeaderCellDef> Ubicación </mat-header-cell>
+      <mat-cell *matCellDef="let machine"> {{ machine.location }} </mat-cell>
+    </ng-container>
+
+    <!-- Estado -->
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+      <mat-cell *matCellDef="let machine"> {{ machine.status }} </mat-cell>
+    </ng-container>
+
+    <!-- Acciones -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let machine">
+        <button mat-icon-button color="accent" (click)="openForm(machine)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteMachine(machine.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row
+      *matHeaderRowDef="[
+        'name',
+        'model',
+        'serialNumber',
+        'location',
+        'status',
+        'actions'
+      ]"
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="
+        let row;
+        columns: [
+          'name',
+          'model',
+          'serialNumber',
+          'location',
+          'status',
+          'actions'
+        ]
+      "
+    ></mat-row>
+  </mat-table>
+</mat-card>

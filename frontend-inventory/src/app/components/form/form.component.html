@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>{{ id ? "Editar Máquina" : "Agregar Máquina" }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="machineForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Modelo</mat-label>
+      <input matInput formControlName="model" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Número de Serie</mat-label>
+      <input matInput formControlName="serialNumber" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ubicación</mat-label>
+      <input matInput formControlName="location" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="active">Activo</mat-option>
+        <mat-option value="inactive">Inactivo</mat-option>
+        <mat-option value="maintenance">Mantenimiento</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Cancelar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="machineForm.invalid"
+    (click)="submitForm()"
+  >
+    Guardar
+  </button>
+</mat-dialog-actions>
